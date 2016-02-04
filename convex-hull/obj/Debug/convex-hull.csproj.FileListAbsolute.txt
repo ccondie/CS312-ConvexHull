@@ -44,3 +44,11 @@ C:\Users\Clayton\Desktop\CS312\proj2_convexHull\convex-hull\obj\Debug\convex-hul
 C:\Users\Clayton\Desktop\CS312\proj2_convexHull\convex-hull\obj\Debug\_2_convex_hull.FormMain.resources
 C:\Users\Clayton\Desktop\CS312\proj2_convexHull\convex-hull\obj\Debug\_1_convex_hull.Properties.Resources.resources
 C:\Users\Clayton\Desktop\CS312\proj2_convexHull\convex-hull\obj\Debug\convex-hull.csproj.GenerateResource.Cache
+C:\Users\clayt\Desktop\CS312-ConvexHull\convex-hull\obj\Debug\01-convex-hull.exe
+C:\Users\clayt\Desktop\CS312-ConvexHull\convex-hull\obj\Debug\01-convex-hull.pdb
+C:\Users\clayt\Desktop\CS312-ConvexHull\convex-hull\obj\Debug\convex-hull.csprojResolveAssemblyReference.cache
+C:\Users\clayt\Desktop\CS312-ConvexHull\convex-hull\obj\Debug\_2_convex_hull.FormMain.resources
+C:\Users\clayt\Desktop\CS312-ConvexHull\convex-hull\obj\Debug\_1_convex_hull.Properties.Resources.resources
+C:\Users\clayt\Desktop\CS312-ConvexHull\convex-hull\obj\Debug\convex-hull.csproj.GenerateResource.Cache
+C:\Users\clayt\Desktop\CS312-ConvexHull\convex-hull\bin\Debug\01-convex-hull.exe
+C:\Users\clayt\Desktop\CS312-ConvexHull\convex-hull\bin\Debug\01-convex-hull.pdb
