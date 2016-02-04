@@ -23,7 +23,7 @@ namespace _2_convex_hull
         }
 
         public void Pause(int milliseconds)
-        {
+        { 
             // Use this especially for debugging and to animate your algorithm slowly
             pictureBoxView.Refresh();
             System.Threading.Thread.Sleep(milliseconds);
@@ -32,7 +32,30 @@ namespace _2_convex_hull
         public void Solve(List<System.Drawing.PointF> pointList)
         {
             // TODO: Insert your code here
-            throw new NotImplementedException();
+            //Sort points from left to right
+            List<System.Drawing.PointF> sortedPoints = pointList.Sort();
+            foreach(System.Drawing.PointF point in pointList)
+            {
+                Console.WriteLine(point.ToString());
+            }
+
         }
+
+        public void SolveCVHLeft(List<System.Drawing.PointF> pointList)
+        {
+
+        }
+
+        public void SolveCVHRight()
+        {
+
+        }
+
+        public void MergeCVH(Object leftCVH, Object rightCVH)
+        {
+
+        }
+
+
     }
 }
