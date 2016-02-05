@@ -43,7 +43,6 @@ namespace _2_convex_hull
             for (int i = 0; i < final.size(); i++)
             {
                 g.DrawLine(purplePen, final.getCurrentPoint(), final.counter());
-                //Pause(10);
             }
         
 
@@ -51,11 +50,6 @@ namespace _2_convex_hull
 
         public ConvexHull SplitAndCombine(List<System.Drawing.PointF> points)
         {
-            //DIAG: output the points
-            //foreach (System.Drawing.PointF point in points)
-            //    Console.WriteLine(point.ToString());
-            //Console.WriteLine();
-
             //If there is only one point in the list of points, we have reached base case, return a CVH with just that point
             if (points.Count == 1)
                 return new ConvexHull(points[0]);
@@ -66,17 +60,6 @@ namespace _2_convex_hull
 
             //Merge the two halves together
             ConvexHull combinec = MergeCVH(left, right);
-
-            Pen orangePen = new Pen(Brushes.Orange, 3);
-
-            //combinec.setCurrentIndex(0);
-            //for (int i = 0; i < combinec.size(); i++)
-            //{
-            //    Console.WriteLine(i);
-            //    g.DrawLine(orangePen, combinec.getCurrentPoint(), combinec.counter());
-            //    Pause(10);
-            //}
-            //pictureBoxView.Refresh();
 
             return combinec;
         }
@@ -97,22 +80,15 @@ namespace _2_convex_hull
             //create new CVH with starting point of the left most point of leftCVH
             ConvexHull newHull = new ConvexHull(leftCVH.getLeftPoint());
             leftCVH.moveToLeft();
+
             //counter through LCVH until you add botTanLeftPt
             while(leftCVH.getCurrentIndex() != leftCVH.getBotTanIndex())
             {
                 newHull.add(leftCVH.counter());
-
-                //newIndex++;
-                //g.DrawLine(redPen, newHull.getPoints()[newIndex], newHull.getPoints()[newIndex - 1]);
-                //Pause(10);
             }
 
             //add RCVH botTan point to new CVH
             newHull.add(rightCVH.getBotTanPoint());
-
-            //newIndex++;
-            //g.DrawLine(greenPen, newHull.getPoints()[newIndex], newHull.getPoints()[newIndex - 1]);
-            //Pause(10);
 
             //move RCVH to botTan point
             rightCVH.moveToBotTan();
@@ -121,18 +97,10 @@ namespace _2_convex_hull
             while (rightCVH.getCurrentIndex() != rightCVH.getTopTanIndex())
             {
                 newHull.add(rightCVH.counter());
-
-                //newIndex++;
-                //g.DrawLine(greenPen, newHull.getPoints()[newIndex], newHull.getPoints()[newIndex - 1]);
-                //Pause(10);
             }
 
             //add LCVH topTan to the new CVH
             newHull.add(leftCVH.getTopTanPoint());
-
-            //newIndex++;
-            //g.DrawLine(bluePen, newHull.getPoints()[newIndex], newHull.getPoints()[newIndex - 1]);
-            //Pause(10);
 
             //move LCVH to topTan point
             leftCVH.moveToTopTan();
@@ -141,11 +109,9 @@ namespace _2_convex_hull
             while (leftCVH.getCurrentIndex() != leftCVH.getLeftIndex())
             {
                 newHull.add(leftCVH.counter());
-
-                //newIndex++;
-                //g.DrawLine(bluePen, newHull.getPoints()[newIndex], newHull.getPoints()[newIndex - 1]);
-                //Pause(10);
             }
+
+            //The last point added to the hull will be a repeat
             newHull.delete(newHull.size() - 1);
 
             //return
@@ -335,31 +301,6 @@ namespace _2_convex_hull
             return false;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         class PointComparitor : IComparer<PointF>{
             public int Compare(PointF x, PointF y){
                 if (x.X < y.X)
@@ -369,6 +310,8 @@ namespace _2_convex_hull
             }
         }
     }
+
+
 
     class ConvexHull
     {
@@ -404,22 +347,13 @@ namespace _2_convex_hull
         }
 
         public void delete(int index)
-        {
-            cvhPoints.RemoveAt(index);
-        }
+        {    cvhPoints.RemoveAt(index);     }
 
         public int size()
-        {
-            return cvhPoints.Count;
-        }
+        {    return cvhPoints.Count;    }
 
         public List<PointF> getPoints()
-        {
-            return cvhPoints;
-        }
-
-        
-
+        {    return cvhPoints;   }
 
         //Advances the current location index by one (circular) and returns the Point Object at current Location
         public PointF counter()
@@ -446,97 +380,65 @@ namespace _2_convex_hull
 
         //Things pertaining to current point
         public int getCurrentIndex()
-        {
-            return currentLoc;
-        }
+        {    return currentLoc;     }
 
         public void setCurrentIndex(int index)
-        {
-            currentLoc = index;
-        }
-
+        {    currentLoc = index;      }
 
         public PointF getCurrentPoint()
-        {
-            return cvhPoints[currentLoc];
-        }
+        {    return cvhPoints[currentLoc];      }
+
 
         //Things pertaining to the left most point
         public void moveToLeft()
-        {
-            currentLoc = leftPoint;
-        }
+        {   currentLoc = leftPoint;     }
 
         public PointF getLeftPoint()
-        {
-            return cvhPoints[leftPoint];
-        }
+        {    return cvhPoints[leftPoint];      }
 
         public int getLeftIndex()
-        {
-            return leftPoint;
-        }
+        {    return leftPoint;    }
 
         //Things pertaining to the right most point
         public void moveToRight()
-        {
-            currentLoc = rightPoint;
-        }
+        {    currentLoc = rightPoint;      }
 
         public PointF getRightPoint()
-        {
-            return cvhPoints[rightPoint];
-        }
+        {    return cvhPoints[rightPoint];       }
 
         public int getRightIndex()
-        {
-            return rightPoint;
-        }
+        {    return rightPoint;     }
 
         
 
         
         //TopTan
         public void moveToTopTan()
-        {
-            currentLoc = topTan;
-        }
+        {    currentLoc = topTan;      }
 
         public void setTopTan(int newTopTan)
-        {
-            topTan = newTopTan;
-        }
+        {    topTan = newTopTan;      }
 
         public PointF getTopTanPoint()
-        {
-            return cvhPoints[topTan];
-        }
+        {    return cvhPoints[topTan];     }
 
         public int getTopTanIndex()
-        {
-            return topTan;
-        }
+        {    return topTan;      }
+
+
 
         //BotTan
         public void moveToBotTan()
-        {
-            currentLoc = botTan;
-        }
+        {    currentLoc = botTan;     }
 
         public void setBotTan(int newBotTan)
-        {
-            botTan = newBotTan;
-        }
+        {   botTan = newBotTan;    }
 
         public PointF getBotTanPoint()
-        {
-            return cvhPoints[botTan];
-        }
+        {    return cvhPoints[botTan];  }
 
         public int getBotTanIndex()
-        {
-            return botTan;
-        }
+        {   return botTan;    }
 
     }
 }
