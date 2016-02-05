@@ -49,23 +49,52 @@ namespace _2_convex_hull
 
             //If there is only one point in the list of points, we have reached base case, return a CVH with just that point
             if (points.Count == 1)
-            {
-                return new ConvexHull(points);
-            }
+                return new ConvexHull(points[0]);
+            
 
             //Splt the points collection into two halves
             ConvexHull left = SplitAndCombine(points.GetRange(0, (int)Math.Floor((double)points.Count / 2)));
             ConvexHull right = SplitAndCombine(points.GetRange((int)Math.Floor((double)points.Count / 2), (int)Math.Ceiling((double)points.Count / 2)));
 
+            //Merge the two halves together
+            ConvexHull combinec = MergeCVH(left, right);
 
 
             return null;
         }
 
-        public void MergeCVH(Object leftCVH, Object rightCVH)
+        public ConvexHull MergeCVH(ConvexHull leftCVH, ConvexHull rightCVH)
+        {
+            //calculate topTanLeftPt and topTanRightPt
+
+            //calculate botTanLeftPt and botTanRightPt
+
+            //create new CVH with starting point of the left most point of leftCVH
+            //counter through LCVH until you add botTanLeftPt
+            //add RCVH botTan point to new CVH
+            //move RCVH to botTan point
+            //counter through RCVH until you add topTanRightPt
+            //add LCVH topTan to the new CVH
+            //move LCVH to topTan point
+            //add until you encounter leftCVH
+
+            //return
+
+            return null;
+        }
+
+        //function updates the location of the topTan points for both left and right
+        public void calcTopTan(ConvexHull leftCVH, ConvexHull rightCVH)
         {
 
         }
+
+        //function updates the location of the botTan points for both left and right
+        public void calcBotTan(ConvexHull leftCVH, ConvexHull rightCVH)
+        {
+
+        }
+
 
         class PointComparitor : IComparer<PointF>{
             public int Compare(PointF x, PointF y){
@@ -79,34 +108,71 @@ namespace _2_convex_hull
 
     class ConvexHull
     {
-        PointF[] points;
-        int size;
+        List<PointF> cvhPoints;
         int currentLoc;
 
-        public ConvexHull(List<PointF> pointsList)
-        {
-            size = pointsList.Count;
-            points = new PointF[size];
-            currentLoc = 0;
+        int leftPoint;
+        int rightPoint;
 
-            for (int i = 0; i < pointsList.Count; i++)
-                points[i] = pointsList[i];
+        int botTan;
+        int topTan;
+
+        public ConvexHull(PointF point)
+        {
+            cvhPoints = new List<PointF>();
+            cvhPoints.Add(point);
+            currentLoc = 0;
+            leftPoint = 0;
+            rightPoint = 0;
         }
 
         //Advances the current location index by one (circular) and returns the Point Object at current Location
-        public PointF advance()
+        public PointF counter()
         {
-            if (currentLoc == (size - 1))
+            if (currentLoc == (cvhPoints.Count - 1))
                 currentLoc = 0;
             else
                 currentLoc++;
 
-            return points[currentLoc];
+            return cvhPoints[currentLoc];
+        }
+
+        public PointF clock()
+        {
+            if (currentLoc == (0))
+                currentLoc = cvhPoints.Count - 1;
+            else
+                currentLoc--;
+
+            return cvhPoints[currentLoc];
+        }
+
+        public void goToLeft()
+        {
+            currentLoc = leftPoint;
+        }
+
+        public void goToRight()
+        {
+            currentLoc = rightPoint;
         }
 
         public PointF current()
         {
-            return points[currentLoc];
+            return cvhPoints[currentLoc];
+        }
+
+        public void add(PointF point)
+        {
+            double leftX = cvhPoints[leftPoint].X;
+            double rightX = cvhPoints[rightPoint].X;
+
+            cvhPoints.Add(point);
+            if (point.X < leftX)
+                leftX = cvhPoints.Count - 1;
+
+            if (point.X > rightX)
+                rightX = cvhPoints.Count - 1;
         }
 
     }
